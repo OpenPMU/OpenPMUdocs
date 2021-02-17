@@ -9,8 +9,8 @@ So please watch this space!  :)
 
 In the pipeline:
 
-OpenPMU/OpenPMUPhasorEstimator
-OpenPMU/OpenPMUDataSVPlotter
-OpenPMU/OpenPMUCapeSimulator 
+* OpenPMU/OpenPMUPhasorEstimator
+* OpenPMU/OpenPMUDataSVPlotter
+* OpenPMU/OpenPMUCapeSimulator 
 
 We're also easy to get in touch with via www.facebook.com/OpenPMU - Say hi!  :D
