@@ -7,4 +7,10 @@ We're presently migrating our project over from other repositories.  We're also 
 
 So please watch this space!  :)
 
+In the pipeline:
+
+OpenPMU/OpenPMUPhasorEstimator
+OpenPMU/OpenPMUDataSVPlotter
+OpenPMU/OpenPMUCapeSimulator 
+
 We're also easy to get in touch with via www.facebook.com/OpenPMU - Say hi!  :D
