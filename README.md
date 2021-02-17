@@ -7,4 +7,4 @@ We're presently migrating our project over from other repositories.  We're also 
 
 So please watch this space!  :)
 
-We're also easy to get in touch with via facebook.com/OpenPMU - Say hi!  :D
+We're also easy to get in touch with via www.facebook.com/OpenPMU - Say hi!  :D
