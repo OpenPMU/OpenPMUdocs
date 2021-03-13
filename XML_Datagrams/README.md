@@ -1,7 +1,44 @@
+# OpenPMU V2 - XML Datagrams
+
 The purpose of this document is to describe the XML datagram formats used within OpenPMU V2.  There are two main datagrams in use in OpenPMU:
 
 * XML Sampled Values
 * XML Phasor Values
+
+## Overview
+
+In OpenPMU V2, all aspects of the Phasor Measurement Unit data pipeline are rigidly modular.  The three important modules in the pipeline are:
+
+* Data Acquisition (Usually an ADC, sometimes simulator or playback of recordings).
+** Produces a stream of sampled values formatted in XML.
+* Phasor Estimation (estimates phasors from sampled values).
+** Produces a stream of phasors formatted in XML.
+* Telecommunications (Usually an IEEE C37.118.2 or IEC 61850-90-5 adapter).
+** Provides, for example, a TCP socket with which to connect by IEEE C37.118.2.
+
+You can find a detailed description of OpenPMU's modular configuration and data flows in [this paper](https://ieeexplore.ieee.org/document/8273986):
+
+`D. M. Laverty, J. Hastings, D. J. Morrow, R. Khan, K. Mclaughlin and S. Sezer, "A modular phasor measurement unit design featuring open data exchange methods," 2017 IEEE Power & Energy Society General Meeting, Chicago, IL, USA, 2017, pp. 1-5, doi: 10.1109/PESGM.2017.8273986.`
+
+Although XML is traditionally used to markup data in files, in OpenPMU it is used to markup data in streams of UDP datagrams.  This makes the modules in OpenPMU completely plug and play, yielding a higly flexible system.
+
+The next sections provide a brief description of the XML datagram structures intended to help developers working on the OpenPMU system.
+
+## XML Sampled Values Datagram
+
+An example of the datagram is given below.  The first section of the datagram contains important metadata describing the structure of the sampled values.  
+
+* **Date** and **Time** refer to the time at which the first sampled value (SV) in each payload was taken.  Note: All channels are synchronously sampled, so sample 0 of Channel_0 was acquired at the same time as sample 0 of Channel_1, etc.  
+
+* **Frame** is a sequence number which is useful to determine if frames of data have been dropped.  Normally, the frames are sent at a rate of 2x the nominal system frequency, so on a 50 Hz system the frame number increments from 0 to 99 and then loops to 0.  On a 60 Hz system, it loops between 0 and 119.
+
+* **Fs** is the sampling rate / sample frequency of the ADC.  The period between sampled values (__Ts__) is given as __Ts = 1 / Fs__.  In this example, the sampling rate is 12,800 Hz, so the period is 78.125 μs.  This means that sample 1 occurs at time 22:04:00.000078125, and sample 2 occurs at 22:04:00.00015625, and so on.
+
+* **n** is the number of sampled values in each __Payload__.  Here there are 128 sampled values in each payload.  Multiplying __n__ by __Ts__ tells us that the payload represents 10 ms of waveform data.
+
+* **bits** is the number of bits per sampled value.  In this case, 16 means that the sampled values are expressed as 16-bit signed integers.
+
+* **Channels** is the number of channels of data contained in this datagram.  In this case, there are 3 channels.
 
 ```xml
 <OpenPMU>
