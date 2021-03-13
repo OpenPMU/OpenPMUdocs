@@ -24,7 +24,7 @@ Although XML is traditionally used to markup data in files, in OpenPMU it is use
 
 The next sections provide a brief description of the XML datagram structures intended to help developers working on the OpenPMU system.
 
-## XML Sampled Values Datagram
+## XML Sampled Values (SV) Datagram
 
 An example of the datagram is given below.  The first section of the datagram contains important metadata describing the structure of the sampled values.  
 
@@ -82,5 +82,70 @@ Each channel is described as starting with a tag named **Channel_N** where __N__
 		<Range>275</Range>
 		<Payload>  ..Base64..  </Payload>
 	</Channel_2>
+</OpenPMU>
+```
+
+## XML Phasor Values (PV) Datagram
+
+The structure of the phasor values datagram is largely similar to that of the sampled values datagram above.  Much of the metadata, particularly that describing the individual channels, is copied directly from the SV datagram.
+
+* **Format** Indicates that this datagram is a __Phasors__ datagram.
+
+* **Date** and **Time** indicates the time at which the phasor estimations contained within the datagram are valid.  In this case, it is 460 ms past the top of the second.
+
+* **Frame** is a sequence check.  This frame is Frame 23.  The number of frames will depend on the rate at which phasors are estimated.  If estimating at nominal frequecy, the __Frame__ number will loop between 0 and 49 (50 Hz systems) or 0 and 59 (60 Hz systems).  It is useful to check programmatically for missing data.
+
+* **Algorithm** This is a free text field which is used to state the name of the algoritm in use.  This is useful for subsequently comparing / evaluating / debugging various algorithms against the same test conditions.
+
+* **Channels** is the number of channels of data contained in this datagram.  In this case, there are 3 channels.
+
+Each channel is described as starting with a tag named **Channel_N** where __N__ starts at 0.  Within this tag there is metadata which is unique to that channel, and then the phasor values estimated by the phasor estimation algorithm (from the sampled values).  Note that, usually, each phase is processed completely independently by the phasor estimator as if it had no knowledge of any of the other phases.
+
+* **Name**, **Type**, **"Phase**, **Range** are usually copied directly from the SV datagram.
+
+* **Mag** and **Angle** express the phasor value for that channel in polar form.
+
+* **Freq** is the frequency estimated for that channel.  In IEEE C37.118.2, only one frequency is reported.  The Telecoms module will handle this, often by using the frequency of only one channel, or an average, or some other manner selected by the user.  In IEC 61850-90-5, frequency is reported for each channel.
+
+* **ROCOF** is the rate-of-change-of-frequency estimated for that channel.  Note similar issue re onward telecoms as with __Freq__.
+
+```xml
+<OpenPMU>
+	<Format>Phasors</Format>
+	<Date>2021-02-28</Date>
+	<Time>22:04:00.460</Time>
+	<Frame>23</Frame>
+	<Algorithm>LSE V1.0 by Xiaodong Zhao</Algorithm>
+	<Channels>3</Channels>
+	<Channel_0>
+		<Name>Belfast_Va</Name>
+		<Type>V</Type>
+		<Phase>a</Phase>
+		<Range>275</Range>
+		<Mag>240.00001</Mag>
+		<Angle>0.403</Angle>
+		<Freq>50.690</Freq>
+		<ROCOF>0.001</ROCOF>
+	</Channel_0>
+	<Channel_1>
+		<Name>Belfast_Vb</Name>
+		<Type>V</Type>
+		<Phase>b</Phase>
+		<Range>275</Range>
+		<Mag>239.99988</Mag>
+		<Angle>120.904</Angle>
+		<Freq>50.692</Freq>
+		<ROCOF>0.000</ROCOF>
+	</Channel_1>
+	<Channel_2>
+		<Name>Belfast_Vc</Name>
+		<Type>V</Type>
+		<Phase>c</Phase>
+		<Range>275</Range>
+		<Mag>239.99532</Mag>
+		<Angle>-120.749</Angle>
+		<Freq>50.689</Freq>
+		<ROCOF>-0.002</ROCOF>
+		</Channel_2>
 </OpenPMU>
 ```
