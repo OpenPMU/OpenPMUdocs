@@ -40,6 +40,18 @@ An example of the datagram is given below.  The first section of the datagram co
 
 * **Channels** is the number of channels of data contained in this datagram.  In this case, there are 3 channels.
 
+Each channel is described as starting with a tag named **Channel_N** where __N__ starts at 0.  Within this tag there is metadata which is unique to that channel, and then the payload of sampled values.
+
+* **Name** is the name of that channel.  Here the channel name is '__Belfast_Va__'.  This name is used to name the phasors produced by the phasor estimator, and ultimately by the Telecoms interface.
+
+* **Type** states if the channel is a voltage channel '__V__' or a current channel '__I__'.
+
+* **Phase** states which phase the channel represents.  This is useful when storing data from polyphase circuits as it avoids having to parse such information from the __Name__ tag, which might in the case of some end users may employ an esoteric naming convention.  Typically these are labelled '__a__', '__b__', '__c__', '__n__'.
+
+* **Range** states the full scale deflection of the sampled values.  In the case of signed 16-bit integers, this means that a value of 32,768 equates to a voltage of 275 V.
+
+* **Payload** the payload is the sampled values encoded in Base64.  The reason for this is to map the binary data to a set of ASCII characters so that the datagrams can be passed and parsed through virtually any data manipulation tool.  There is a trade off as it increases the size of the datagrams, but since these datagrams are intended for inter-module communication, often on the same localhost or devices in the same physical enclosure, this does not lead to any issues re bandwidth on external networks.
+
 ```xml
 <OpenPMU>
 	<Date>2021-02-28</Date>
