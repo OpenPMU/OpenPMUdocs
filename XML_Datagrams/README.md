@@ -20,7 +20,7 @@ You can find a detailed description of OpenPMU's modular configuration and data 
 
 `D. M. Laverty, J. Hastings, D. J. Morrow, R. Khan, K. Mclaughlin and S. Sezer, "A modular phasor measurement unit design featuring open data exchange methods," 2017 IEEE Power & Energy Society General Meeting, Chicago, IL, USA, 2017, pp. 1-5, doi: 10.1109/PESGM.2017.8273986.`
 
-Although XML is traditionally used to markup data in files, in OpenPMU it is used to markup data in streams of UDP datagrams.  This makes the modules in OpenPMU completely plug and play, yielding a higly flexible system.
+Although XML is traditionally used to markup data in files, in OpenPMU it is used to markup data in streams of UDP datagrams.  This makes the modules in OpenPMU completely plug and play, yielding a highly flexible system.
 
 The next sections provide a brief description of the XML datagram structures intended to help developers working on the OpenPMU system.
 
