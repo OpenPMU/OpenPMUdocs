@@ -28,27 +28,27 @@ The next sections provide a brief description of the XML datagram structures int
 
 An example of the datagram is given below.  The first section of the datagram contains important metadata describing the structure of the sampled values.  
 
-* **Format** indicates that this datagram is a __Samples__ datagram.  This field is not required, but recommended.
+* **Format** indicates that this datagram is a _Samples_ datagram.  This field is not required, but recommended.
 
 * **Date** and **Time** refer to the time at which the first sampled value (SV) in each payload was taken.  Note: All channels are synchronously sampled, so sample 0 of Channel_0 was acquired at the same time as sample 0 of Channel_1, etc.  
 
 * **Frame** is a sequence number which is useful to determine if frames of data have been dropped.  Normally, the frames are sent at a rate of 2x the nominal system frequency, so on a 50 Hz system the frame number increments from 0 to 99 and then loops to 0.  On a 60 Hz system, it loops between 0 and 119.
 
-* **Fs** is the sampling rate / sample frequency of the ADC.  The period between sampled values (__Ts__) is given as __Ts = 1 / Fs__.  In this example, the sampling rate is 12,800 Hz, so the period is 78.125 μs.  This means that sample 1 occurs at time 22:04:00.000078125, and sample 2 occurs at 22:04:00.00015625, and so on.
+* **Fs** is the sampling rate / sample frequency of the ADC.  The period between sampled values (_Ts_) is given as _Ts = 1 / Fs_.  In this example, the sampling rate is 12,800 Hz, so the period is 78.125 μs.  This means that sample 1 occurs at time 22:04:00.000078125, and sample 2 occurs at 22:04:00.00015625, and so on.
 
-* **n** is the number of sampled values in each __Payload__.  Here there are 128 sampled values in each payload.  Multiplying __n__ by __Ts__ tells us that the payload represents 10 ms of waveform data.
+* **n** is the number of sampled values in each _Payload_.  Here there are 128 sampled values in each payload.  Multiplying _n_ by _Ts_ tells us that the payload represents 10 ms of waveform data.
 
 * **bits** is the number of bits per sampled value.  In this case, 16 means that the sampled values are expressed as 16-bit signed integers.
 
 * **Channels** is the number of channels of data contained in this datagram.  In this case, there are 3 channels.
 
-Each channel is described as starting with a tag named **Channel_N** where __N__ starts at 0.  Within this tag there is metadata which is unique to that channel, and then the payload of sampled values.
+Each channel is described as starting with a tag named **Channel_N** where _N_ starts at 0.  Within this tag there is metadata which is unique to that channel, and then the payload of sampled values.
 
-* **Name** is the name of that channel.  Here the channel name is '__Belfast_Va__'.  This name is used to name the phasors produced by the phasor estimator, and ultimately by the Telecoms interface.
+* **Name** is the name of that channel.  Here the channel name is '_Belfast_Va_'.  This name is used to name the phasors produced by the phasor estimator, and ultimately by the Telecoms interface.
 
-* **Type** states if the channel is a voltage channel '__V__' or a current channel '__I__'.
+* **Type** states if the channel is a voltage channel '_V_' or a current channel '_I_'.
 
-* **Phase** states which phase the channel represents.  This is useful when storing data from polyphase circuits as it avoids having to parse such information from the __Name__ tag, which might in the case of some end users may employ an esoteric naming convention.  Typically these are labelled '__a__', '__b__', '__c__', '__n__'.
+* **Phase** states which phase the channel represents.  This is useful when storing data from polyphase circuits as it avoids having to parse such information from the _Name_ tag, which might in the case of some end users may employ an esoteric naming convention.  Typically these are labelled '_a_', '_b_', '_c_', '_n_'.
 
 * **Range** states the full scale deflection of the sampled values.  In the case of signed 16-bit integers, this means that a value of 32,768 equates to a voltage of 275 V.
 
@@ -92,17 +92,17 @@ Each channel is described as starting with a tag named **Channel_N** where __N__
 
 The structure of the phasor values datagram is largely similar to that of the sampled values datagram above.  Much of the metadata, particularly that describing the individual channels, is copied directly from the SV datagram.
 
-* **Format** indicates that this datagram is a __Phasors__ datagram.
+* **Format** indicates that this datagram is a _Phasors_ datagram.
 
 * **Date** and **Time** indicates the time at which the phasor estimations contained within the datagram are valid.  In this case, it is 460 ms past the top of the second.
 
-* **Frame** is a sequence check.  This frame is Frame 23.  The number of frames will depend on the rate at which phasors are estimated.  If estimating at nominal frequecy, the __Frame__ number will loop between 0 and 49 (50 Hz systems) or 0 and 59 (60 Hz systems).  It is useful to check programmatically for missing data.
+* **Frame** is a sequence check.  This frame is Frame 23.  The number of frames will depend on the rate at which phasors are estimated.  If estimating at nominal frequecy, the _Frame_ number will loop between 0 and 49 (50 Hz systems) or 0 and 59 (60 Hz systems).  It is useful to check programmatically for missing data.
 
 * **Algorithm** This is a free text field which is used to state the name of the algoritm in use.  This is useful for subsequently comparing / evaluating / debugging various algorithms against the same test conditions.
 
 * **Channels** is the number of channels of data contained in this datagram.  In this case, there are 3 channels.
 
-Each channel is described as starting with a tag named **Channel_N** where __N__ starts at 0.  Within this tag there is metadata which is unique to that channel, and then the phasor values estimated by the phasor estimation algorithm (from the sampled values).  Note that, usually, each phase is processed completely independently by the phasor estimator as if it had no knowledge of any of the other phases.
+Each channel is described as starting with a tag named **Channel_N** where _N_ starts at 0.  Within this tag there is metadata which is unique to that channel, and then the phasor values estimated by the phasor estimation algorithm (from the sampled values).  Note that, usually, each phase is processed completely independently by the phasor estimator as if it had no knowledge of any of the other phases.
 
 * **Name**, **Type**, **"Phase**, **Range** are usually copied directly from the SV datagram.
 
@@ -110,7 +110,7 @@ Each channel is described as starting with a tag named **Channel_N** where __N__
 
 * **Freq** is the frequency estimated for that channel.  In IEEE C37.118.2, only one frequency is reported.  The Telecoms module will handle this, often by using the frequency of only one channel, or an average, or some other manner selected by the user.  In IEC 61850-90-5, frequency is reported for each channel.
 
-* **ROCOF** is the rate-of-change-of-frequency estimated for that channel.  Note similar issue re onward telecoms as with __Freq__.
+* **ROCOF** is the rate-of-change-of-frequency estimated for that channel.  Note similar issue re onward telecoms as with _Freq_.
 
 ```xml
 <OpenPMU>
