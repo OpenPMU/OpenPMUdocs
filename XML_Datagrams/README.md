@@ -28,6 +28,8 @@ The next sections provide a brief description of the XML datagram structures int
 
 An example of the datagram is given below.  The first section of the datagram contains important metadata describing the structure of the sampled values.  
 
+* **Format** indicates that this datagram is a __Samples__ datagram.  This field is not required, but recommended.
+
 * **Date** and **Time** refer to the time at which the first sampled value (SV) in each payload was taken.  Note: All channels are synchronously sampled, so sample 0 of Channel_0 was acquired at the same time as sample 0 of Channel_1, etc.  
 
 * **Frame** is a sequence number which is useful to determine if frames of data have been dropped.  Normally, the frames are sent at a rate of 2x the nominal system frequency, so on a 50 Hz system the frame number increments from 0 to 99 and then loops to 0.  On a 60 Hz system, it loops between 0 and 119.
@@ -54,6 +56,7 @@ Each channel is described as starting with a tag named **Channel_N** where __N__
 
 ```xml
 <OpenPMU>
+	<Format>Samples</Format>
 	<Date>2021-02-28</Date>
 	<Time>22:04:00.000</Time>
 	<Frame>0</Frame>
@@ -89,7 +92,7 @@ Each channel is described as starting with a tag named **Channel_N** where __N__
 
 The structure of the phasor values datagram is largely similar to that of the sampled values datagram above.  Much of the metadata, particularly that describing the individual channels, is copied directly from the SV datagram.
 
-* **Format** Indicates that this datagram is a __Phasors__ datagram.
+* **Format** indicates that this datagram is a __Phasors__ datagram.
 
 * **Date** and **Time** indicates the time at which the phasor estimations contained within the datagram are valid.  In this case, it is 460 ms past the top of the second.
 
