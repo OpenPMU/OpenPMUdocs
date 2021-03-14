@@ -28,3 +28,12 @@ The workflow to decode this back to decimal represention is visualised well usin
 **Graphically:**
 
 ![Excel Chart](/Base64_Decode/Base64ExampleChart.PNG)
+
+
+
+These 128 samples represent half a nominal cycle.  On a 50 Hz system, the period of time spanned by these sampled values, and across the x-axis of the chart, is 10 ms.  
+
+
+_Looking for more information, or a paper to cite:_
+
+`D. M. Laverty, J. Hastings, D. J. Morrow, R. Khan, K. Mclaughlin and S. Sezer, "A modular phasor measurement unit design featuring open data exchange methods," 2017 IEEE Power & Energy Society General Meeting, Chicago, IL, USA, 2017, pp. 1-5, doi: 10.1109/PESGM.2017.8273986.`
