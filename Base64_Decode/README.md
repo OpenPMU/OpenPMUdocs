@@ -10,3 +10,4 @@ The following is 128 sampled values, 16-bit signed integers, encoded in Base64.
 `
 
 
+![Cryptii Example](/Decode Base64 Using Cryptii.PNG)
