@@ -16,7 +16,7 @@ The Data Acquisition stage is usually a hardware device measuring real data from
 
 ### Repositories
 
-Most of our code is written in Python and has been tested using Python 3.7.
+Most of our code is written in Python and has been tested using Python 3.9.4.
 
 We are organising a series of repos for various tools related to OpenPMU.  These include:
 
