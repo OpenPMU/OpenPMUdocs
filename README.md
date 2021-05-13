@@ -20,7 +20,7 @@ Most of our code is written in Python and has been tested using Python 3.9.4.
 
 We are organising a series of repos for various tools related to OpenPMU.  These include:
 
-* **[OpenPMU Phasor Estimator](https://github.com/OpenPMU/OpenPMU_Phasor_Estimator):** A Python tool for producing synchrophasors from sampled values.
+* **[OpenPMU Phasor Estimator](https://github.com/OpenPMU/OpenPMU_Phasor_Estimator):** A Python tool for producing synchrophasors from sampled values.  Presently private, you will need to request access.
 * **[OpenPMU XML SV Simulator](https://github.com/OpenPMU/OpenPMU_XML_SV_Simulator):** Simulator which produces a stream of SV data as you would get from our BeagleBone Black GPS Disciplined ADC system.
 * **OpenPMU Data SV Plotter:** A Python tool with a GUI for visualising sampled value data from either an ADC or simulation.
 
