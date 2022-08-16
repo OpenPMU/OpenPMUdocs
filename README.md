@@ -25,7 +25,7 @@ We are organising a series of repos for various tools related to OpenPMU.  These
 * **OpenPMU Data SV Plotter:** A Python tool with a GUI for visualising sampled value data from either an ADC or simulation.
 
 
-We'll be making these repos public soon once we have the source code well commented and explained.  In the meantime, [check out our papers](www.openpmu.org/publications).
+We'll be making these repos public soon once we have the source code well commented and explained.  In the meantime, [check out our papers](http://www.openpmu.org/publications).
 
 If you're interested in collaborating, say hi on [Facebook](www.facebook.com/OpenPMU).
 
